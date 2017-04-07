@@ -75,6 +75,15 @@ public class SightingTest {
     assertEquals(0, Sighting.all().size());
   }
 
+  // @Test
+  //  public void save_recordsTimeSightedInDatabase() {
+  //    Animal testAnimal = new Animal("Deer");
+  //    testAnimal.save();
+  //    Timestamp timesighted = Animal.find(testAnimal.getId()).getTimeSighted();
+  //    Timestamp rightNow = new Timestamp(new Date().getTime());
+  //    assertEquals(DateFormat.getDateTimeInstance().format(rightNow), DateFormat.getDateTimeInstance().format(timesighted));
+  //  }
+
   @Test
   public void find_returnsNullWhenNoAnimalFound_null() {
     assertTrue(Animal.find(999) == null);
