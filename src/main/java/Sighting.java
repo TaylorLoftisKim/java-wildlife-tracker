@@ -5,17 +5,17 @@ import java.util.Arrays;
 import java.sql.Timestamp;
 
 public class Sighting {
+  private int id;
   private int animal_id;
   private String location;
   private String ranger_name;
-  private int id;
   private Timestamp timesighted;
 
   public Sighting(int animal_id, String location, String ranger_name) {
+    this.id = id;
     this.animal_id = animal_id;
     this.location = location;
     this.ranger_name = ranger_name;
-    this.id = id;
   }
 
   public int getId() {
@@ -44,18 +44,17 @@ public class Sighting {
       return false;
     } else {
       Sighting newSighting = (Sighting) otherSighting;
-      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerName().equals(newSighting.getRangerName()) && this.getTimeSighted().equals(newSighting.getTimeSighted());
+      return this.getAnimalId() == (newSighting.getAnimalId()) && this.getLocation().equals(newSighting.getLocation()) && this.getRangerName().equals(newSighting.getRangerName());
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO sightings (animal_id, location, ranger_name) VALUES (:animal_id, :location, :ranger_name, :timesighted);";
+      String sql = "INSERT INTO sightings (animal_id, location, ranger_name, timesighted) VALUES (:animal_id, :location, :ranger_name, now());";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("animal_id", this.animal_id)
         .addParameter("location", this.location)
         .addParameter("ranger_name", this.ranger_name)
-        .addParameter("timesighted", this.timesighted)
         .throwOnMappingFailure(false)
         .executeUpdate()
         .getKey();
