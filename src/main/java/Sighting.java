@@ -11,6 +11,8 @@ public class Sighting {
   private String ranger_name;
   private Timestamp timesighted;
 
+  public static String SIGHTING_CONFIRMED = "You have successfully added an animal to the webpage! Thank You!";
+
   public Sighting(int animal_id, String location, String ranger_name) {
     this.id = id;
     this.animal_id = animal_id;
@@ -36,6 +38,10 @@ public class Sighting {
 
   public Timestamp getTimeSighted() {
     return timesighted;
+  }
+
+  public String getSightingConfirmed() {
+    return SIGHTING_CONFIRMED;
   }
 
   @Override
